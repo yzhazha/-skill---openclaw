@@ -1,72 +1,99 @@
-# 寤虹瓚鏁堟灉鍥鹃鏍兼寚鍗?
-涓讳汉鍋忓ソ鐨勬晥鏋滃浘椋庢牸鏍囧噯锛屾槸鍒ゆ柇鐢婚潰浼樺姡鐨勬牳蹇冧緷鎹€?
-## 鏍稿績椋庢牸鍏抽敭璇?
-### 鑹茶皟
-- 浣庨ケ鍜屼腑鎬х伆
-- 鏆栧喎瀵规瘮
-- 骞插噣閫氶€?- 楂樿皟鐧借壊/娴呯伆鑹蹭负鍩鸿皟
-- 灞€閮ㄧ偣缂€棰滆壊
+# Architectural Render Style Guide
 
-### 鍏夌嚎
-- 鑷劧婕皠鍏変负涓?- 鏌斿拰鏃犵‖闃村奖
-- 閫氶€忔槑浜?- 鍏夊奖鍏崇郴鏌斿拰锛岄槾褰遍€氶€忚€屼笉娌夐噸
-- 妯℃嫙涓撲笟寤虹瓚鎽勫奖鐨勫厜绾挎晥鏋?
-### 姘涘洿
-- 闈欒哀楂樼骇
-- 鐢靛奖鎰?- 寮虹儓鐨勬皼鍥存劅鍜屾暣浣撴劅
-- 鐢婚潰寮鸿皟寤虹瓚鍑犱綍褰㈡€佺殑娓呮櫚搴?
-### 鏉愯川
-- 鐪熷疄璐ㄦ劅
-- 鏈夌粏寰憰鐤靛拰鍒嗙紳
-- 闈炲畬缇庡鏂欐劅
-- 鍘熺敓娣峰嚌鍦熸湁妯℃澘绾圭悊鍜屽垎缂?- 鏈ㄨ川鏍兼爡鍝戝厜璐ㄦ劅
+User's preferred render style standards, core basis for judging image quality.
 
-### 鏋勫浘
-- 淇濇寔鍘熸湁寤虹瓚缁撴瀯鍜屾瘮渚?- 瑙嗚涓嶅彉
-- 鍙繘琛岄鏍艰浆鎹㈠拰鏉愯川娓叉煋锛屼笉鏀瑰彉寤虹瓚褰㈡€?
-### 闆炬皵
-- 杩滃娣℃贰钖勯浘
-- 澧炲姞绾垫繁鎰?- 钀ラ€犵┖闂村眰娆?
-### 閰嶆櫙
-- 閫傚綋浜虹墿锛屼笉鎶㈠缓绛戜富浣?- 鍩庡競骞垮満鐜
-- 鍓嶆櫙鍐欏疄鐭虫潗閾鸿
-- 涓櫙缁挎涓庡叕鍏辫鏂?- 鍏锋湁鐢熸椿姘旀伅鐨勪汉鏅礌鏉?
----
+## Core Style Keywords
 
-## 鍙傝€冨浘椋庢牸鍒嗘瀽
+### Color
+- Low saturation neutral gray
+- Warm-cold contrast
+- Clean and transparent
+- High-key white/light gray base
+- Local color accents
 
-### 鍙傝€冨浘1锛氭牎鍥缓绛戯紙鏈ㄨ川+绫崇櫧锛?- **鑹茶皟锛?* 娓╂殩鏈ㄨ川鑹?鏄庝寒绫崇櫧锛岄珮楗卞拰鑷劧缁垮拰娣辩传鑹茬偣缂€
-- **鍏夊奖锛?* 鑷劧婕皠鍏夛紝鏌斿拰鏃犵‖闃村奖锛屽厜绾垮潎鍖€
-- **姘涘洿锛?* 浜烘枃娆㈠揩锛屽厖婊℃椿鍔涚殑瀛︽湳绀惧尯姘涘洿
-- **鏉愯川锛?* 鏈ㄨ川鏍兼爡缁嗚吇绾圭悊銆侀€氶€忕幓鐠冦€佹贩鍑濆湡棰楃矑鎰?
-### 鍙傝€冨浘2锛氭贩鍑濆湡寤虹瓚锛堟瀬绠€鍐峰郴锛?- **鑹茶皟锛?* 娴呯伆+鐏扮櫧+澶╄摑锛屼綆楗卞拰搴︼紝骞插噣涓€?- **鍏夊奖锛?* 娓呴€忚嚜鐒跺厜锛岄珮璋冪収鏄庢棤寮虹儓瀵规瘮锛屾煍鍜岄槾褰?- **姘涘洿锛?* 闈欒哀鐞嗘€х邯蹇电鎰燂紝娲佸噣瀹滃眳
-- **鏉愯川锛?* 鍘熺敓娣峰嚌鍦熸湁妯℃澘绾圭悊鍜屽垎缂濓紝妯悜鐧惧彾绮惧瘑宸ヨ壓鎰?
-### 鍙傝€冨浘3锛氭．鏋楀缓绛戯紙鍖楁鑷劧涓讳箟锛?- **鑹茶皟锛?* 娣辩孩瑜?娣辩豢+鑻旇棑缁匡紝浣庨ケ鍜屽ぇ鍦拌壊绯?- **鍏夊奖锛?* 鏂戦┏杩囨护鍏夛紝鏌斿拰婕弽灏勶紝鏅ㄦ槒姘涘洿
-- **姘涘洿锛?* 瀹侀潤娌绘剤锛屽ぉ浜哄悎涓€锛屼汉涓庤嚜鐒跺拰璋愬叡鐢?- **鏉愯川锛?* 鍨傜洿鏈ㄦ牸鏍呭搼鍏夎川鎰燂紝鐜荤拑娓╁铏氬疄瀵规瘮
+### Light
+- Natural diffuse light mainly
+- Soft, no hard shadows
+- Bright and transparent
+- Soft light and shadow relationship, transparent shadows without heaviness
+- Professional architectural photography lighting effect
 
----
+### Atmosphere
+- Serene, high-end
+- Cinematic
+- Strong sense of atmosphere and integrity
+- Emphasize clarity of architectural geometric forms
 
-## 鏁堟灉鍥惧垎鏋?缁村害
+### Material
+- Real texture
+- Subtle flaws and seams
+- Non-perfect plastic look
+- Raw concrete with formwork texture and seams
+- Wood lattice matte finish
 
-鍒嗘瀽鏁堟灉鍥炬椂锛屽繀椤讳粠浠ヤ笅缁村害缁欏嚭涓撲笟鎰忚锛?
-| 缁村害 | 璇勪及瑕佺偣 |
-|------|----------|
-| **缁撴瀯涓庢瘮渚?* | 寤虹瓚缁撴瀯鏄惁鍚堢悊銆佹瘮渚嬫槸鍚﹀崗璋冦€佸舰鎬佹槸鍚︽纭?|
-| **鍏夊奖閫昏緫** | 鍏夊奖鍏崇郴鏄惁鐪熷疄銆佹皼鍥存槸鍚﹀埌浣嶃€侀槾褰辨槸鍚﹂€氶€?|
-| **鏉愯川璐ㄦ劅** | 鏉愯川鏄惁鐪熷疄銆佹槸鍚︽湁鍒嗙紳鍜岀粏寰憰鐤点€侀潪濉戞枡鎰?|
-| **鑹茶皟涓庡崗璋?* | 鑹茶皟鏄惁缁熶竴銆佸喎鏆栧姣旀槸鍚︽伆褰?|
-| **鐢婚潰灞傛** | 绾垫繁鎰熴€佹櫙娣便€侀浘姘旀晥鏋滄槸鍚︽湁鏁?|
-| **閰嶆櫙涓庢瀯鍥?* | 浜虹墿/妞嶇墿/閰嶆櫙鏄惁鎭板綋銆佹瀯鍥炬槸鍚﹀钩琛?|
-| **鏁翠綋姘涘洿** | 鐢靛奖鎰熴€佹槸鍚︽墦鍔ㄤ汉銆佹暣浣撴劅鏄惁寮虹儓 |
+### Composition
+- Keep original building structure and proportion
+- Same viewpoint
+- Only perform style transfer and material rendering, do not change building form
+
+### Mist
+- Subtle mist in distance
+- Increase depth
+- Create spatial layers
+
+### Scenery
+- Appropriate people, not overshadowing main building
+- Urban plaza environment
+- Foreground realistic stone paving
+- Mid-ground green plants and public facilities
+- People and scene materials with life atmosphere
 
 ---
 
-## 椋庢牸閫夋嫨鎸囧崡
+## Reference Images Style Analysis
 
-| 椤圭洰绫诲瀷 | 鎺ㄨ崘椋庢牸 |
-|----------|----------|
-| 绔炶禌鏁堟灉鍥?| MIR鍥介檯绔炶禌椋庛€侀珮璋冪櫧鑹叉祬鐏板熀璋?|
-| 鍟嗕笟灞曠ず | 鍟嗕笟鍐欏疄娓叉煋銆佸ぇ閲忎汉鏅礌鏉?|
-| 浣忓畢灏忓尯 | 娓╅Θ鐢熸椿姘涘洿銆侀€傚綋浜虹墿鐐圭紑 |
-| 鍏叡寤虹瓚 | 绾康纰戞劅銆佹磥鍑€閫氶€?|
-| 妫灄/鑷劧 | 鍖楁鑷劧涓讳箟銆佸ぇ鍦拌壊绯?|
+### Reference 1: Campus Architecture (Wood + Cream White)
+- **Color:** Warm wood + bright cream white, high saturation natural green and deep purple accents
+- **Light:** Natural diffuse light, soft no hard shadows, even lighting
+- **Atmosphere:** Humanistic, cheerful, vibrant academic community
+- **Material:** Delicate wood lattice texture, transparent glass, concrete grain
+
+### Reference 2: Concrete Architecture (Minimalist Cold)
+- **Color:** Light gray + gray white + sky blue, low saturation, clean neutral
+- **Light:** Clear natural light, high-key lighting no strong contrast, soft shadows
+- **Atmosphere:** Serene, rational, monumental, clean and livable
+- **Material:** Raw concrete with formwork texture and seams, precision horizontal louvers
+
+### Reference 3: Forest Architecture (Nordic Naturalism)
+- **Color:** Deep red-brown + dark green + moss green, low saturation earth tones
+- **Light:** Dappled filtered light, soft diffuse reflection, dawn/dusk atmosphere
+- **Atmosphere:** Serene, healing, harmony between man and nature
+- **Material:** Vertical wood lattice matte finish, glass greenhouse contrast
+
+---
+
+## Render Analysis 7 Dimensions
+
+When analyzing renders, must provide professional opinions from these dimensions:
+
+| Dimension | Evaluation Points |
+|----------|-------------------|
+| **Structure & Proportion** | Is structure reasonable, proportion coordinated, form correct |
+| **Light & Shadow Logic** | Is lighting realistic, atmosphere appropriate, shadows transparent |
+| **Material Texture** | Is material realistic, subtle seams and flaws, not plastic |
+| **Color & Harmony** | Is color unified, warm-cold contrast appropriate |
+| **Layer & Depth** | Is there depth, DOF, mist effect for space |
+| **Scenery & Composition** | Are people/plants appropriate, composition balanced |
+| **Overall Atmosphere** | Cinematic, touching, strong overall sense |
+
+---
+
+## Style Selection Guide
+
+| Project Type | Recommended Style |
+|--------------|-------------------|
+| Competition Render | MIR International Competition, High-key white light gray base |
+| Commercial Display | Commercial Realistic, Rich people scene |
+| Residential | Warm life atmosphere, appropriate people |
+| Public Building | Monumental, Clean and transparent |
+| Forest/Nature | Nordic Naturalism, Earth tones |
