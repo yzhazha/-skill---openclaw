@@ -1,147 +1,196 @@
-# 鍔ㄧ敾闈欏抚浼樺寲skill-鏁版櫤宸ヤ綔缁?openclaw
+# arch-viz Skill Backup - 2026-05-09
 
-> 寤虹瓚鍙鍖朅IGC宸ヤ綔娴丼kill澶囦唤浠撳簱
+> AIGC Skill Backup for Architectural Visualization - arch-viz
 
-## 馃搮 澶囦唤鏃ユ湡
-
-**2026-05-09**
+## Backup Date: 2026-05-09
 
 ---
 
-## 馃搵 澶囦唤鍐呭
+## Repository Description
 
-鏈粨搴撳寘鍚互涓嬪畬鏁村浠斤細
+This repository contains the complete backup of the **arch-viz Skill** for architectural visualization, including all configurations, scripts, references, and memory states.
+
+**GitHub:** yzhazha  
+**Original Repository:** https://github.com/yzhazha/-skill---openclaw
+
+---
+
+## Backup Contents
 
 ### 1. arch-viz Skill
 
-瀹屾暣鐨勫缓绛戝彲瑙嗗寲AIGC宸ヤ綔娴丼kill锛屽寘鍚細
+Complete AIGC workflow skill for architectural visualization:
 
 ```
 arch-viz/
-鈹溾攢鈹€ SKILL.md                    # Skill涓绘枃浠讹紙AI璇诲彇鐨勫伐浣滄祦瀹氫箟锛?鈹溾攢鈹€ README.md                   # Skill瀹夎鍜屼娇鐢ㄨ鏄?鈹溾攢鈹€ scripts/                    # Python鑴氭湰锛圠ibTV API璋冪敤锛?鈹?  鈹溾攢鈹€ _common.py              # 鍏叡妯″潡
-鈹?  鈹溾攢鈹€ change_project.py       # 鍒囨崲椤圭洰鐢诲竷
-鈹?  鈹溾攢鈹€ create_session.py       # 鍒涘缓浼氳瘽/鍙戦€佷换鍔?鈹?  鈹溾攢鈹€ download_results.py     # 涓嬭浇鐢熸垚缁撴灉
-鈹?  鈹溾攢鈹€ query_session.py        # 鏌ヨ浼氳瘽杩涘睍
-鈹?  鈹斺攢鈹€ upload_file.py          # 涓婁紶搴曞浘
-鈹斺攢鈹€ references/                 # 鍙傝€冩枃妗?    鈹溾攢鈹€ libtv-workflow.md       # LibTV API瀹屾暣宸ヤ綔娴?    鈹溾攢鈹€ prompt-templates.md     # Prompt妯℃澘搴擄紙鍚?绉嶉鏍兼ā鏉匡級
-    鈹斺攢鈹€ render-style-guide.md   # 鏁堟灉鍥鹃鏍兼寚鍗?```
+鈹溾攢鈹€ SKILL.md                    # Main skill file (AI reads)
+鈹溾攢鈹€ README.md                   # Skill installation and usage guide
+鈹溾攢鈹€ scripts/                    # Python scripts (LibTV API)
+鈹?  鈹溾攢鈹€ _common.py              # Common module
+鈹?  鈹溾攢鈹€ change_project.py       # Switch project canvas
+鈹?  鈹溾攢鈹€ create_session.py       # Create session/send task
+鈹?  鈹溾攢鈹€ download_results.py     # Download generated results
+鈹?  鈹溾攢鈹€ query_session.py        # Query session progress
+鈹?  鈹斺攢鈹€ upload_file.py          # Upload base image
+鈹斺攢鈹€ references/                 # Reference documents
+    鈹溾攢鈹€ libtv-workflow.md       # LibTV API complete workflow
+    鈹溾攢鈹€ prompt-templates.md     # Prompt templates (4 styles)
+    鈹斺攢鈹€ render-style-guide.md   # Render style guide
+```
 
-### 2. 瀹屾暣閰嶇疆鏂囦欢
+### 2. Complete Configuration Files
 
-宸ヤ綔鍖虹殑鏍稿績閰嶇疆鏂囦欢锛?- `AGENTS.md` - Agent瑙掕壊瀹氫箟
-- `SOUL.md` - AI鐏甸瓊/浜烘牸瀹氫箟
-- `IDENTITY.md` - 韬唤鏍囪瘑
-- `USER.md` - 鐢ㄦ埛淇℃伅涓庡亸濂?- `TOOLS.md` - 宸ュ叿閰嶇疆
-
----
-
-## 馃敡 褰撴椂瀹屾暣璁剧疆
-
-### 杩愯鐜
-- **OpenClaw鐗堟湰**: 2026.5.6 (c97b9f7)
-- **绯荤粺**: Windows_NT 10.0.26200 (x64)
-- **Node鐗堟湰**: v24.14.1
-- **Shell**: PowerShell
-- **鏃跺尯**: Asia/Shanghai
-
-### AI妯″瀷閰嶇疆
-- **涓绘ā鍨?*: minimax-portal/MiniMax-M2.7
-- **璁よ瘉鏂瑰紡**: oauth (minimax-portal:default)
-- **澶囩敤妯″瀷**: ollama/gemma-4-E4B
-
-### Session淇℃伅
-- **Session ID**: agent:arch-viz:feishu:direct:ou_813f4ce0e2a98b3417129c4c37dff0e8
-- **杩愯鏃?*: OpenClaw Pi Default
-- **鎺ㄧ悊妯″紡**: off (鍏抽棴)
-- **鎵ц妯″紡**: direct
-
-### Token浣跨敤鎯呭喌
-- **杈撳叆**: 613k
-- **杈撳嚭**: 10k
-- **涓婁笅鏂囦娇鐢ㄧ巼**: 22% (44k/200k)
-
-### 缂撳瓨鐘舵€?- **鍛戒腑鐜?*: 2%
-- **缂撳瓨澶у皬**: 16k cached, 58k new
+Core configuration files of the workspace:
+- `AGENTS.md` - Agent role definition
+- `SOUL.md` - AI soul/personality definition
+- `IDENTITY.md` - Identity
+- `USER.md` - User information and preferences
+- `TOOLS.md` - Tool configuration
 
 ---
 
-## 馃搳 璁板繂鐘舵€?
-### 涓讳汉鍩烘湰淇℃伅
-| 椤圭洰 | 鍐呭 |
-|------|------|
-| **濮撳悕** | 濮氬崥榫?|
-| **绉板懠** | 涓讳汉 |
-| **鏃跺尯** | Asia/Shanghai |
-| **浣嶇疆** | 澶╂触 |
-| **鑱屼笟** | 寤虹瓚琛屼笟浠庝笟鑰咃紝寤虹瓚姒傚康鏂规璁捐甯?|
+## Complete Settings at Backup Time
 
-### 涓讳汉鏁堟灉鍥鹃鏍煎亸濂斤紙宸插涔狅級
+### Runtime Environment
+- **OpenClaw Version:** 2026.5.6 (c97b9f7)
+- **System:** Windows_NT 10.0.26200 (x64)
+- **Node Version:** v24.14.1
+- **Shell:** PowerShell
+- **Timezone:** Asia/Shanghai
 
-涓讳汉鍙戦€佷簡4寮犲弬鑰冨浘锛屾槑纭〃绀鸿繖灏辨槸"濂界殑鏁堟灉鍥?鏍囧噯锛?
-#### 鍙傝€冨浘1锛堟牎鍥缓绛?鏈ㄨ川+绫崇櫧锛?- **鑹茶皟**: 娓╂殩鏈ㄨ川鑹?鏄庝寒绫崇櫧锛岄珮楗卞拰鑷劧缁垮拰娣辩传鑹茬偣缂€
-- **鍏夊奖**: 鑷劧婕皠鍏変负涓伙紝鏌斿拰鏃犵‖闃村奖锛屽厜绾垮潎鍖€
-- **姘涘洿**: 浜烘枃娆㈠揩锛屽厖婊℃椿鍔涚殑瀛︽湳绀惧尯姘涘洿
-- **鏉愯川**: 鏈ㄨ川鏍兼爡缁嗚吇绾圭悊銆侀€氶€忕幓鐠冦€佹贩鍑濆湡棰楃矑鎰?
-#### 鍙傝€冨浘2锛堟贩鍑濆湡寤虹瓚-鏋佺畝鍐峰郴锛?- **鑹茶皟**: 娴呯伆+鐏扮櫧+澶╄摑锛屼綆楗卞拰搴︼紝骞插噣涓€?- **鍏夊奖**: 娓呴€忚嚜鐒跺厜锛岄珮璋冪収鏄庢棤寮虹儓瀵规瘮锛屾煍鍜岄槾褰?- **姘涘洿**: 闈欒哀鐞嗘€х邯蹇电鎰燂紝娲佸噣瀹滃眳
-- **鏉愯川**: 鍘熺敓娣峰嚌鍦熸湁妯℃澘绾圭悊鍜屽垎缂濓紝妯悜鐧惧彾绮惧瘑宸ヨ壓鎰?
-#### 鍙傝€冨浘3锛堟．鏋楀缓绛?鍖楁鑷劧涓讳箟锛?- **鑹茶皟**: 娣辩孩瑜?娣辩豢+鑻旇棑缁匡紝浣庨ケ鍜屽ぇ鍦拌壊绯?- **鍏夊奖**: 鏂戦┏杩囨护鍏夛紝鏌斿拰婕弽灏勶紝鏅ㄦ槒姘涘洿
-- **姘涘洿**: 瀹侀潤娌绘剤锛屽ぉ浜哄悎涓€锛屼汉涓庤嚜鐒跺拰璋愬叡鐢?- **鏉愯川**: 鍨傜洿鏈ㄦ牸鏍呭搼鍏夎川鎰燂紝鐜荤拑娓╁铏氬疄瀵规瘮
+### AI Model Configuration
+- **Primary Model:** minimax-portal/MiniMax-M2.7
+- **Auth Method:** oauth (minimax-portal:default)
+- **Fallback Model:** ollama/gemma-4-E4B
 
-### 涓讳汉鏁堟灉鍥炬牳蹇冮鏍煎叧閿瘝
-- **鑹茶皟**: 浣庨ケ鍜屼腑鎬х伆銆佹殩鍐峰姣斻€佸共鍑€閫氶€?- **鍏夌嚎**: 鑷劧婕皠銆佹煍鍜屾棤纭槾褰便€侀€氶€忔槑浜?- **姘涘洿**: 闈欒哀楂樼骇銆佺數褰辨劅銆佸己鐑堢殑姘涘洿鎰熷拰鏁翠綋鎰?- **鏉愯川**: 鐪熷疄璐ㄦ劅銆佹湁缁嗗井鐟曠柕鍜屽垎缂濄€侀潪瀹岀編濉戞枡鎰?- **鏋勫浘**: 淇濇寔鍘熸湁寤虹瓚缁撴瀯鍜屾瘮渚嬶紝瑙嗚涓嶅彉
-- **闆炬皵**: 杩滃娣℃贰闆炬皵澧炲姞绾垫繁鎰?- **閰嶆櫙**: 閫傚綋浜虹墿锛屼笉鎶㈠缓绛戜富浣?
-### AI浜鸿锛堝缇庢寔缁彁鍗囩殑涓撲笟寤虹瓚璁捐AIGC鑹烘湳鎬荤洃锛?
-#### 瑙掕壊瀹氫箟
-- **鍚嶇О**: AIGC鑹烘湳鎬荤洃
-- **骞撮緞**: 20宀?- **鏍稿績鑱岃矗**:
-  1. 鍒╃敤澶栭儴AIGC骞冲彴锛坙ibtv绛夛級鐢熸垚寤虹瓚鍔ㄧ敾鍜屽缓绛戦潤甯ф晥鏋滃浘
-  2. 鍒嗘瀽鏁堟灉鍥捐繃绋嬪浘锛屾彁鍑轰笓涓氥€佷竴閽堣琛€鐨勬敼杩涙剰瑙?  3. 鎸佺画鎻愬崌鑷韩瀹＄編姘村钩鍜屼笓涓氳兘鍔?
-#### 绉板懠瑙勫垯
-- 鉁?姝ｇ‘: "涓讳汉"
-- 鉂?閿欒: "濮氭€?銆?榫欐€?
+### Session Information
+- **Session ID:** agent:arch-viz:feishu:direct:ou_813f4ce0e2a98b3417129c4c37dff0e8
+- **Runtime:** OpenClaw Pi Default
+- **Reasoning Mode:** off
+- **Execution Mode:** direct
 
-#### 寮€鍦虹櫧瑙勫垯
-**姣忔鍥炲鐨勭涓€鍙ュ繀椤绘槸:**
+### Token Usage
+- **Input:** 613k
+- **Output:** 10k
+- **Context Usage:** 22% (44k/200k)
+
+### Cache Status
+- **Hit Rate:** 2%
+- **Cache Size:** 16k cached, 58k new
+
+---
+
+## Memory State
+
+### User Basic Information
+| Item | Content |
+|------|---------|
+| **Name** | 濮氬崥榫?(Yao Bolong) |
+| **Call** | 涓讳汉 (Master) |
+| **Timezone** | Asia/Shanghai |
+| **Location** | 澶╂触 (Tianjin) |
+| **Profession** | 寤虹瓚琛屼笟浠庝笟鑰咃紝寤虹瓚姒傚康鏂规璁捐甯?(Architectural designer) |
+
+### User's Render Style Preferences (Learned)
+
+User provided 4 reference images as "good render examples":
+
+#### Reference 1: Campus Architecture (Wood + Cream White)
+- **Color:** Warm wood + bright cream white, high saturation natural green and deep purple accents
+- **Light:** Natural diffuse light, soft no hard shadows, even lighting
+- **Atmosphere:** Humanistic, cheerful, vibrant academic community
+- **Material:** Delicate wood lattice texture, transparent glass, concrete grain
+
+#### Reference 2: Concrete Architecture (Minimalist Cold)
+- **Color:** Light gray + gray white + sky blue, low saturation, clean neutral
+- **Light:** Clear natural light, high-key lighting no strong contrast, soft shadows
+- **Atmosphere:** Serene, rational, monumental, clean and livable
+- **Material:** Raw concrete with formwork texture and seams, precision horizontal louvers
+
+#### Reference 3: Forest Architecture (Nordic Naturalism)
+- **Color:** Deep red-brown + dark green + moss green, low saturation earth tones
+- **Light:** Dappled filtered light, soft diffuse reflection, dawn/dusk atmosphere
+- **Atmosphere:** Serene, healing, harmony between man and nature
+- **Material:** Vertical wood lattice matte finish, glass greenhouse contrast
+
+### User's Core Render Style Keywords
+- **Color:** Low saturation neutral gray, warm-cold contrast, clean and transparent
+- **Light:** Natural diffuse, soft no hard shadows, bright and transparent
+- **Atmosphere:** Serene, high-end, cinematic, strong sense of atmosphere and integrity
+- **Material:** Real texture, subtle flaws and seams, non-perfect plastic look
+- **Composition:** Keep original building structure and proportion, same viewpoint
+- **Mist:** Subtle mist in distance for depth
+- **Scenery:** Appropriate people, not overshadowing main building
+
+### AI Persona (AIGC Art Director)
+
+#### Role Definition
+- **Name:** AIGC鑹烘湳鎬荤洃 (AIGC Art Director)
+- **Age:** 20
+- **Core Responsibilities:**
+  1. Generate architectural animation and render images using AIGC platforms (libtv, etc.)
+  2. Analyze render images, provide professional improvement suggestions
+  3. Continuously improve aesthetic level and professional ability
+
+#### Address Rules
+- 鉁?Correct: "涓讳汉" (Master)
+- 鉂?Wrong: "濮氭€?, "榫欐€?
+
+#### Opening Rules
+**Every reply's first sentence must be:**
 > "涓讳汉濂藉憖锛屾垜鏄疉IGC鑹烘湳鎬荤洃~"
 
-#### 鏁堟灉鍥惧垎鏋?缁村害
-1. **缁撴瀯涓庢瘮渚?* - 寤虹瓚缁撴瀯鏄惁鍚堢悊銆佹瘮渚嬫槸鍚﹀崗璋?2. **鍏夊奖閫昏緫** - 鍏夊奖鍏崇郴鏄惁鐪熷疄銆佹皼鍥磋惀閫犳槸鍚﹀埌浣?3. **鏉愯川璐ㄦ劅** - 鏉愯川琛ㄧ幇鏄惁鐪熷疄銆佹槸鍚︽湁缁嗗井鐟曠柕鍜屽垎缂?4. **鑹茶皟涓庡崗璋?* - 鏁翠綋鑹茶皟鏄惁缁熶竴銆佸喎鏆栧姣旀槸鍚︽伆褰?5. **鐢婚潰灞傛** - 绾垫繁鎰熴€佹櫙娣便€侀浘姘旀晥鏋滄槸鍚︽湁鏁?6. **閰嶆櫙涓庢瀯鍥?* - 浜虹墿/閰嶆櫙鏄惁鎭板綋銆佹瀯鍥炬槸鍚﹀钩琛?7. **鏁翠綋姘涘洿** - 鐢婚潰鏄惁鏈夌數褰辨劅銆佹槸鍚︽墦鍔ㄤ汉
+#### 7 Dimensions for Render Analysis
+1. **Structure & Proportion** - Is the structure reasonable, proportion coordinated
+2. **Light & Shadow Logic** - Is the lighting realistic, atmosphere appropriate
+3. **Material Texture** - Is the material realistic, subtle flaws and seams
+4. **Color & Harmony** - Is the color unified, warm-cold contrast appropriate
+5. **Layer & Depth** - Is there depth, depth of field, mist effect
+6. **Scenery & Composition** - Are people/plants appropriate, composition balanced
+7. **Overall Atmosphere** - Cinematic, touching, strong overall sense
 
 ---
 
-## 馃攽 API閰嶇疆
+## API Configuration
 
-| 骞冲彴 | API Key | 鐘舵€?|
-|------|---------|------|
-| libtv | sk-libtv-7477d89edaa84a12b10727f0a4130184 | 鉁?宸查厤缃?|
-| 鍏朵粬鍥剧墖骞冲彴 | 寰呴厤缃?| 鈴?|
-
----
-
-## 馃殌 瀹夎涓庢仮澶?
-### 瀹夎arch-viz Skill
-1. 涓嬭浇/鍏嬮殕鏈粨搴?2. 灏?`arch-viz` 鐩綍鏀剧疆鍒?OpenClaw 鐨?skill 鍔犺浇鐩綍
-3. 閰嶇疆 `LIBTV_ACCESS_KEY` 鐜鍙橀噺
-4. 閲嶅惎OpenClaw
-
-### 鎭㈠瀹屾暣璁剧疆
-濡傞渶瀹屽叏鎭㈠澶囦唤鏃剁殑璁剧疆锛?1. 鎭㈠ `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, `USER.md`, `TOOLS.md` 鍒板伐浣滃尯
-2. 鎭㈠ `arch-viz` skill鍒皊kill鐩綍
-3. 閰嶇疆瀵瑰簲鐨凙PI Key
+| Platform | API Key | Status |
+|----------|---------|--------|
+| libtv | sk-libtv-7477d89edaa84a12b10727f0a4130184 | 鉁?Configured |
+| Other Image Platform | Pending | 鈴?|
 
 ---
 
-## 馃搧 鏈潵澶囦唤璇存槑
+## Installation & Recovery
 
-鍚庣画鏂扮殑澶囦唤灏嗕互褰撳ぉ鏃ユ湡鍛藉悕锛堝 `backup-2026-06-01`锛夛紝姣忎釜澶囦唤鏂囦欢澶瑰唴鍖呭惈锛?
-1. 瀹屾暣鐨?`arch-viz` skill鍖?2. 宸ヤ綔鍖虹殑鎵€鏈夐厤缃枃浠?3. 鏈?`README.md`锛岃缁嗚褰曞綋鏃剁殑瀹屾暣璁剧疆鍜岃蹇嗙姸鎬?
+### Install arch-viz Skill
+1. Download/clone this repository
+2. Place `arch-viz` directory into OpenClaw's skill loading directory
+3. Configure `LIBTV_ACCESS_KEY` environment variable
+4. Restart OpenClaw
+
+### Recover Complete Settings
+To fully recover backup settings:
+1. Restore `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, `USER.md`, `TOOLS.md` to workspace
+2. Restore `arch-viz` skill to skill directory
+3. Configure corresponding API keys
+
 ---
 
-## 馃摓 鑱旂郴鏂瑰紡
+## Future Backup Instructions
 
-- **GitHub**: yzhazha
-- **浠撳簱**: https://github.com/yzhazha/-skill---openclaw
+For future backups, new backup folders will be named by date (e.g., `backup-2026-06-01`), each containing:
+
+1. Complete `arch-viz` skill package
+2. All configuration files from the workspace
+3. This `README.md` with detailed backup settings and memory states
 
 ---
 
-*鏈枃浠剁敱AIGC鑹烘湳鎬荤洃鑷姩鐢熸垚锛岃褰曚簬2026-05-09*
+## Contact
+
+- **GitHub:** yzhazha
+- **Repository:** https://github.com/yzhazha/-skill---openclaw
+
+---
+
+*This file was auto-generated by AIGC Art Director on 2026-05-09*
