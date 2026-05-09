@@ -17,12 +17,12 @@ arch-viz/
 │   ├── _common.py             # Common module
 │   ├── change_project.py      # Switch project
 │   ├── create_session.py      # Create session
-│   ├── download_results.py    # Download results
+│   ├── download_results.py     # Download results
 │   ├── query_session.py       # Query progress
 │   └── upload_file.py         # Upload file
 └── references/
     ├── libtv-workflow.md      # Workflow guide
-    ├── prompt-templates.md    # Prompt templates
+    ├── prompt-templates.md     # Prompt templates
     └── render-style-guide.md  # Style guide
 ```
 
