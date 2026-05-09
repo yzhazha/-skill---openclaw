@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""鏌ヨ浼氳瘽杩涘睍锛欸ET /openapi/session/:sessionId锛岃繑鍥炴秷鎭垪琛?""
+"""Query session progress: GET /openapi/session/:sessionId, returns message list"""
 
 import argparse
 import json
@@ -12,30 +12,30 @@ from _common import query_session, build_project_url
 
 def main():
     parser = argparse.ArgumentParser(
-        description="鏌ヨ浼氳瘽娑堟伅鍒楄〃锛堜細璇濊繘灞曪級",
+        description="Query session message list (session progress)",
         epilog="""
-鐜鍙橀噺:
-  LIBTV_ACCESS_KEY  蹇呭～锛孊earer 閴存潈
-  OPENAPI_IM_BASE 鎴?IM_BASE_URL  鍙€夛紝榛樿 https://im.liblib.tv
+Environment Variables:
+  LIBTV_ACCESS_KEY  Required, Bearer Auth
+  OPENAPI_IM_BASE or IM_BASE_URL  Optional, default https://im.liblib.tv
 
-绀轰緥:
+Examples:
   python3 query_session.py 90f05e0c-5d08-4148-be40-e30fc7c7bedf
   python3 query_session.py 90f05e0c-5d08-4148-be40-e30fc7c7bedf --after-seq 5
-  python3 query_session.py SESSION_ID --project-id PROJECT_UUID   # 缁撴灉涓檮甯?projectUrl
+  python3 query_session.py SESSION_ID --project-id PROJECT_UUID   # Results include projectUrl
         """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("session_id", help="浼氳瘽 ID锛堢敱 create_session 杩斿洖锛?)
+    parser.add_argument("session_id", help="Session ID (from create_session)")
     parser.add_argument(
         "--after-seq",
         type=int,
         default=0,
-        help="鍙繑鍥?seq 澶т簬璇ュ€肩殑娑堟伅锛岀敤浜庡閲忔媺鍙栵紙榛樿 0锛?,
+        help="Only return messages with seq greater than this value (for incremental fetch, default 0)",
     )
     parser.add_argument(
         "--project-id",
         default="",
-        help="椤圭洰 ID锛堝嵆 create_session 杩斿洖鐨?projectUuid锛夛紝浼犲叆鍒欑粨鏋滀腑闄勫甫 projectUrl 渚夸簬灞曠ず",
+        help="Project ID (projectUuid from create_session), results will include projectUrl",
     )
     args = parser.parse_args()
 
