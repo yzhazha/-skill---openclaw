@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""鍒囨崲褰撳墠 accessKey 缁戝畾鐨勯」鐩細POST /openapi/session/change-project"""
+"""Switch project: POST /openapi/session/change-project"""
 
 import json
 import sys
@@ -14,7 +14,7 @@ def main():
     project_uuid = data.get("projectUuid", "")
 
     if not project_uuid:
-        print("閿欒锛氭湭杩斿洖 projectUuid", file=sys.stderr)
+        print("Error: No projectUuid returned", file=sys.stderr)
         sys.exit(1)
 
     project_url = build_project_url(project_uuid)
