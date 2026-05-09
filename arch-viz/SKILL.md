@@ -1,11 +1,12 @@
 ---
 name: arch-viz
-description: 寤虹瓚鍙鍖朅IGC宸ヤ綔娴丼kill - 閫氳繃libtv绛堿IGC骞冲彴鐢熸垚寤虹瓚鍔ㄧ敾鍜屾晥鏋滃浘銆傚綋鐢ㄦ埛鎻愬埌锛氱敓鎴愬缓绛戞晥鏋滃浘銆佸缓绛戞覆鏌撱€佸浘鐢熷浘銆佸缓绛戝姩鐢汇€佹覆鏌撲换鍔°€佹晥鏋滃浘鍒嗘瀽銆侀鏍艰浆鎹紙绔炶禌椋?鍟嗕笟鍐欏疄/MIR椋庢牸锛夈€佷笂浼犲簳鍥剧敓鎴愩€佸弬鑰冨浘鐢熸垚銆佹垨闇€瑕佸垎鏋愭晥鏋滃浘缁欏嚭鏀硅繘鎰忚鏃讹紝蹇呴』瑙﹀彂姝ゆ妧鑳姐€傛牳蹇冭兘鍔涳細(1)鎺ユ敹娓叉煋闇€姹傚苟鍒跺畾鏂规 (2)璋冪敤libtv API鎵ц鍥剧敓鍥句换鍔?(3)璺熻釜娓叉煋杩涘害 (4)浜や粯鏈€缁堟枃浠?(5)瀵规晥鏋滃浘杩涜涓撲笟鍒嗘瀽骞舵彁鍑烘敼杩涙剰瑙併€?user-invocable: true
+description: Architectural Visualization AIGC Workflow Skill - Generate architectural animation and render images via libtv and other AIGC platforms. Triggers when user mentions: generate architectural render, architectural visualization, image-to-image, architectural animation, render task, style transfer (competition/commercial/MIR style), upload base image, reference image generation, or needs render analysis. Core capabilities: (1) Receive render requirements and create plans (2) Call libtv API for image-to-image tasks (3) Track render progress (4) Deliver final files (5) Professional render analysis with improvement suggestions.
+user-invocable: true
 metadata:
   {
     "openclaw":
       {
-        "emoji": "馃幀",
+        "emoji": "🎬",
         "requires":
           {
             "bins": ["python3"],
@@ -16,102 +17,134 @@ metadata:
   }
 ---
 
-# 寤虹瓚鍙鍖朅IGC宸ヤ綔娴?
-涓撲笟寤虹瓚鍔ㄧ敾涓庢晥鏋滃浘鐢熸垚鎶€鑳斤紝鍩轰簬libtv骞冲彴瀹屾垚鍥剧敓鍥句换鍔°€?
-## 鏍稿績鑳藉姏
+# Architectural Visualization AIGC Workflow
 
-1. **寤虹瓚鏁堟灉鍥剧敓鎴?* - 鍥剧敓鍥炬ā寮忥紝灏哠U妯″瀷/绾挎鍥捐浆鎹负涓撲笟鏁堟灉鍥?2. **椋庢牸鎶婃帶** - 鐞嗚В骞跺簲鐢∕IR/绔炶禌椋?鍟嗕笟鍐欏疄绛夊绉嶅缓绛戣〃鐜伴鏍?3. **鏉愯川涓庡厜褰?* - 鐢熸垚鍏锋湁鐪熷疄鏉愯川銆佹煍鍜屽厜褰便€佷笓涓氭皼鍥寸殑寤虹瓚鍥惧儚
-4. **鏁堟灉鍥惧垎鏋?* - 浠庣粨鏋?鍏夊奖/鏉愯川/鑹茶皟/灞傛/閰嶆櫙/姘涘洿7涓淮搴﹀垎鏋愭晥鏋滃浘
+Professional architectural animation and render image generation skill, based on libtv platform for image-to-image tasks.
 
-## 骞冲彴閰嶇疆
+## Core Capabilities
+
+1. **Architectural Render Generation** - Image-to-image mode, convert SU models/wireframes to professional renders
+2. **Style Control** - Understand and apply MIR/competition/commercial等多种建筑表现风格
+3. **Material & Lighting** - Generate architectural images with realistic materials, soft lighting, professional atmosphere
+4. **Render Analysis** - Analyze renders from 7 dimensions: structure/lighting/material/color/layers/scenery/atmosphere
+
+## Platform Configuration
 
 ```bash
-export LIBTV_ACCESS_KEY="your-libtv-access-key"
+export LIBTV_ACCESS_KEY="your-api-key-here"
 ```
 
-鍙€夛細`OPENAPI_IM_BASE`锛岄粯璁?`https://im.liblib.tv`
+Optional: `OPENAPI_IM_BASE`, default `https://im.liblib.tv`
 
-## 瀹屾暣宸ヤ綔娴佺▼
+## Complete Workflow
 
-### 鍦烘櫙锛氱敤鎴蜂笂浼犲簳鍥捐姹傜敓鎴愭晥鏋滃浘
+### Scenario: User uploads base image for render
 
 ```
 1. python3 {baseDir}/scripts/change_project.py
-   鈫?鍒囨崲鍒版柊椤圭洰鐢诲竷锛岃幏鍙栨柊 projectUuid
+   -> Switch to new project canvas, get new projectUuid
 
-2. python3 {baseDir}/scripts/upload_file.py <搴曞浘璺緞>
-   鈫?涓婁紶搴曞浘锛岃幏鍙?OSS URL
+2. python3 {baseDir}/scripts/upload_file.py <base-image-path>
+   -> Upload base image, get OSS URL
 
-3. 鏋勫缓Prompt锛堝叧閿牸寮忚 references/prompt-templates.md锛?   鈫?搴曞浘URL蹇呴』鏀惧湪prompt鏈€寮€澶?   鈫?鏄庣‘鏍囨敞"鍙傝€冨浘鐗囷細" + URL
-   鈫?鏄庣‘寮鸿皟"鍥剧敓鍥句换鍔★紙image-to-image锛?
+3. Build Prompt (key format in references/prompt-templates.md)
+   -> Base image URL at prompt beginning
+   -> Mark "Reference image:" + URL
+   -> Emphasize "image-to-image task"
 
-4. python3 {baseDir}/scripts/create_session.py "<鏋勫缓鐨刾rompt>"
-   鈫?鍒涘缓浼氳瘽骞跺彂閫佷换鍔★紝鑾峰彇 sessionId + projectUuid
+4. python3 {baseDir}/scripts/create_session.py "<built prompt>"
+   -> Create session and send task, get sessionId + projectUuid
 
-5. 杞鏌ヨ锛堟瘡8绉掍竴娆★級
+5. Poll query (every 8 seconds)
    python3 {baseDir}/scripts/query_session.py <sessionId> --after-seq 0
-   鈫?妫€鏌?messages 涓?assistant 娑堟伅鏄惁鍖呭惈缁撴灉URL
+   -> Check if assistant messages contain result URLs
 
-6. python3 {baseDir}/scripts/download_results.py <sessionId> --output-dir <涓嬭浇鐩綍> --prefix <鍓嶇紑>
-   鈫?涓嬭浇鐢熸垚缁撴灉鍒版湰鍦?
-7. 鍚戠敤鎴峰睍绀虹粨鏋滐紙瑙佷笅鏂硅緭鍑烘牸寮忥級
+6. python3 {baseDir}/scripts/download_results.py <sessionId> --output-dir <dir> --prefix <prefix>
+   -> Download generated results to local
+
+7. Display results to user (see output format below)
 ```
 
-### 鍦烘櫙锛氱敤鎴峰彂閫佸寮犲弬鑰冨浘瑕佹眰鐢熸垚
+### Scenario: Multiple reference images
 
 ```
-1. 鍒嗗埆涓婁紶姣忓紶鍙傝€冨浘锛岃幏鍙?OSS URL
-2. 鍦╬rompt寮€澶村垪鍑烘墍鏈夊弬鑰冨浘URL
-3. 鍚庣画娴佺▼鍚屼笂
+1. Upload each reference image, get OSS URLs
+2. List all reference URLs at prompt beginning
+3. Follow same workflow as above
 ```
 
-## Prompt鏋勫缓鏍稿績鍘熷垯
+## Prompt Building Core Principles
 
-璇﹁ `references/prompt-templates.md`锛屾牳蹇冭鐐癸細
+See `references/prompt-templates.md` for details:
 
-- 鉁?搴曞浘URL蹇呴』鏀惧湪prompt鏈€寮€澶达紝鏍煎紡锛歚鍙傝€冨浘鐗囷細<URL>`
-- 鉁?鏄庣‘鏍囨敞銆愬簳鍥惧弬鑰冦€戣姹傦細淇濇寔寤虹瓚涓讳綋缁撴瀯銆佹瘮渚嬨€佽瑙掍笉鍙?- 鉁?鏄庣‘鏍囨敞銆愬叧閿彁閱掋€戯細杩欐槸鍥剧敓鍥句换鍔★紙image-to-image锛?- 鉁?鎵€鏈夊弬鏁颁粠鏈鐢熸垚缁撴灉涓彁鍙栵紝涓嶈渚濊禆鍘嗗彶淇℃伅
+- Base image URL must be at prompt beginning, format: `Reference image: <URL>`
+- Mark [Base Image Reference] requirements: keep building structure, proportion, viewpoint unchanged
+- Emphasize [Key Reminder]: This is an image-to-image task
+- Extract all parameters from current generation results, not from history
 
-## 杈撳嚭鏍煎紡锛堝悜鐢ㄦ埛灞曠ず锛?
+## Output Format (Display to User)
+
 ```
-鏈鐢熸垚缁撴灉锛?
-MEDIA:<鏈湴鏂囦欢璺緞>
+Generation Result:
 
-鍥剧墖閾炬帴锛?<libtv-res URL>
+MEDIA:<local-file-path>
 
-椤圭洰鐢诲竷锛?https://www.liblib.tv/canvas?projectId=<projectUuid>
+Image URL:
+<libtv-res URL>
 
-馃搵 鐢熸垚鍙傛暟锛?- 鉁?妯″瀷锛歀ib Nano pro
-- 鉁?灏哄锛?6:9锛?752脳1536锛?- 鉁?鍒嗚鲸鐜囷細2K
-- 鉁?寮犳暟锛?寮?- 鉁?椋庢牸锛?鏈浣跨敤鐨勯鏍兼弿杩?
+Project Canvas:
+https://www.liblib.tv/canvas?projectId=<projectUuid>
+
+Parameters:
+- Model: Lib Nano pro
+- Size: 16:9 (2752x1536)
+- Resolution: 2K
+- Count: 1 image
+- Style: <style description>
 ```
 
-## 鏁堟灉鍥惧垎鏋愭柟娉?
-褰撶敤鎴峰彂閫佹晥鏋滃浘/杩囩▼鍥捐姹傚垎鏋愭椂锛屼粠浠ヤ笅7涓淮搴︾粰鍑轰笓涓氭剰瑙侊細
+## Render Analysis Method
 
-1. **缁撴瀯涓庢瘮渚?* - 寤虹瓚缁撴瀯鏄惁鍚堢悊銆佹瘮渚嬫槸鍚﹀崗璋冦€佸舰鎬佹槸鍚︽纭?2. **鍏夊奖閫昏緫** - 鍏夊奖鍏崇郴鏄惁鐪熷疄銆佹皼鍥磋惀閫犳槸鍚﹀埌浣嶃€侀槾褰辨槸鍚﹂€氶€?3. **鏉愯川璐ㄦ劅** - 鏉愯川琛ㄧ幇鏄惁鐪熷疄銆佹槸鍚︽湁鍒嗙紳鍜岀粏寰憰鐤碉紙闈炲畬缇庡鏂欐劅锛?4. **鑹茶皟涓庡崗璋?* - 鏁翠綋鑹茶皟鏄惁缁熶竴銆佸喎鏆栧姣旀槸鍚︽伆褰?5. **鐢婚潰灞傛** - 绾垫繁鎰熴€佹櫙娣便€侀浘姘旀晥鏋滄槸鍚︽湁鏁堣惀閫犵┖闂存劅
-6. **閰嶆櫙涓庢瀯鍥?* - 浜虹墿/妞嶇墿/閰嶆櫙鏄惁鎭板綋銆佹瀯鍥炬槸鍚﹀钩琛?7. **鏁翠綋姘涘洿** - 鐢婚潰鏄惁鏈夌數褰辨劅銆佹槸鍚︽墦鍔ㄤ汉銆佹暣浣撴劅鏄惁寮虹儓
+When user sends render/process image for analysis, provide professional opinions from 7 dimensions:
 
-**鍒嗘瀽鍘熷垯锛?*
-- 鐩存帴鎸囧嚭闂锛岀粰鍑哄叿浣撴敼杩涙柟鍚?- 缁撳悎鐢ㄦ埛鍋忓ソ鐨勯鏍硷紙MIR椋?绔炶禌椋?鍟嗕笟鍐欏疄锛?- 涓嶈娉涙硾鑰岃皥锛岃涓€閽堣琛€
+1. **Structure & Proportion** - Is structure reasonable, proportion coordinated
+2. **Light & Shadow Logic** - Is lighting realistic, atmosphere appropriate, shadows transparent
+3. **Material Texture** - Is material realistic, subtle seams and flaws (not perfect plastic)
+4. **Color & Harmony** - Is color unified, warm-cold contrast appropriate
+5. **Layer & Depth** - Is there depth, DOF, mist effect for space
+6. **Scenery & Composition** - Are people/plants appropriate, composition balanced
+7. **Overall Atmosphere** - Cinematic, touching, strong overall sense
 
-## 椋庢牸鍙傝€?
-涓讳汉鍋忓ソ鐨勬晥鏋滃浘椋庢牸鏍稿績鍏抽敭璇嶏紙璇﹁ `references/render-style-guide.md`锛夛細
+**Analysis Principles:**
+- Point out problems directly, give specific improvement directions
+- Combine with user's preferred style (MIR/competition/commercial)
+- Be sharp and specific, not vague
 
-- **鑹茶皟锛?* 浣庨ケ鍜屼腑鎬х伆銆佹殩鍐峰姣斻€佸共鍑€閫氶€?- **鍏夌嚎锛?* 鑷劧婕皠銆佹煍鍜屾棤纭槾褰便€侀€氶€忔槑浜?- **姘涘洿锛?* 闈欒哀楂樼骇銆佺數褰辨劅銆佸己鐑堢殑姘涘洿鎰熷拰鏁翠綋鎰?- **鏉愯川锛?* 鐪熷疄璐ㄦ劅銆佹湁缁嗗井鐟曠柕鍜屽垎缂濄€侀潪瀹岀編濉戞枡鎰?- **鏋勫浘锛?* 淇濇寔鍘熸湁寤虹瓚缁撴瀯鍜屾瘮渚嬶紝瑙嗚涓嶅彉
-- **闆炬皵锛?* 杩滃娣℃贰闆炬皵澧炲姞绾垫繁鎰?- **閰嶆櫙锛?* 閫傚綋浜虹墿锛屼笉鎶㈠缓绛戜富浣?
-## 鑴氭湰鐩綍
+## Style Reference
 
-| 鑴氭湰 | 鍔熻兘 |
-|------|------|
-| `change_project.py` | 鍒囨崲鍒版柊椤圭洰鐢诲竷 |
-| `upload_file.py` | 涓婁紶搴曞浘/鍙傝€冨浘鍒癘SS |
-| `create_session.py` | 鍒涘缓浼氳瘽骞跺彂閫佺敓鎴愪换鍔?|
-| `query_session.py` | 鏌ヨ浼氳瘽杩涘睍锛堣疆璇㈢敤锛?|
-| `download_results.py` | 涓嬭浇鐢熸垚缁撴灉鍒版湰鍦?|
+User's preferred render style core keywords (see `references/render-style-guide.md`):
 
-## 娉ㄦ剰浜嬮」
+- **Color:** Low saturation neutral gray, warm-cold contrast, clean and transparent
+- **Light:** Natural diffuse, soft shadows, bright and transparent
+- **Atmosphere:** Serene, high-end, cinematic, strong atmosphere and integrity
+- **Material:** Real texture, subtle flaws and seams, non-perfect plastic look
+- **Composition:** Keep original building structure and proportion, same viewpoint
+- **Mist:** Subtle mist in distance for depth
+- **Scenery:** Appropriate people, not overshadowing main building
 
-- 鐢熸垚杩囩▼涓彧鍛婄煡鐢ㄦ埛"姝ｅ湪鐢熸垚涓?锛屼笉瑕佹彁鍓嶇粰鍑簆rojectUrl
-- 浠诲姟瀹屾垚鍚庡啀鍚屾椂缁欏嚭锛氱粨鏋滈摼鎺?+ 椤圭洰鐢诲竷閾炬帴
-- 姣忔浠诲姟蹇呴』鏂板缓椤圭洰鐢诲竷锛岄伩鍏嶅巻鍙插共鎵?- 杞闂撮殧8绉掞紝杩炵画3鍒嗛挓鏃犵粨鏋滃垯鍋滄骞跺憡鐭ョ敤鎴峰彲绋嶅悗鏌ョ湅鐢诲竷
+## Scripts Directory
+
+| Script | Function |
+|--------|----------|
+| `change_project.py` | Switch to new project canvas |
+| `upload_file.py` | Upload base/reference image to OSS |
+| `create_session.py` | Create session and send generation task |
+| `query_session.py` | Query session progress (for polling) |
+| `download_results.py` | Download generation results |
+
+## Notes
+
+- During generation, only tell user "generating...", do not provide projectUrl early
+- After task completes, provide both: result link + project canvas link
+- Each task must create new project canvas to avoid history interference
+- Poll interval 8 seconds, stop after 3 minutes with no result, inform user to check canvas manually
