@@ -1,132 +1,212 @@
-# Prompt妯℃澘搴?
-鎴愬姛鐨刾rompt妯℃澘锛岀敤浜庡缓绛戞晥鏋滃浘鍥剧敓鍥句换鍔°€?
-## 閫氱敤妯℃澘缁撴瀯
+# Prompt Template Library
+
+Successful prompt templates for architectural render image-to-image tasks.
+
+## General Template Structure
 
 ```
-鍙傝€冨浘鐗囷細<搴曞浘OSS URL>
+Reference image: <base-image-OSS-URL>
 
-銆愰噸瑕併€戣涓ユ牸鎸夌収浠ヤ笅瑕佹眰鐢熸垚涓€寮犲浘鐗囷細
+[Important] Please strictly generate an image according to the following requirements:
 
-銆愭ā鍨嬮€夋嫨銆?- 妯″瀷锛歀ib Nano pro
+[Model Selection]
+- Model: Lib Nano pro
 
-銆愬浘鐗囧弬鏁般€?- 姣斾緥锛?6:9
-- 鍒嗚鲸鐜囷細2K
-- 鏁伴噺锛氫粎鐢熸垚1寮?
-銆愬簳鍥惧弬鑰冦€?- 蹇呴』浠ユ彁渚涚殑鍙傝€冨浘鐗囦负搴曞浘
-- 涓ユ牸淇濇寔鍙傝€冨浘鐗囦腑寤虹瓚鐨勪富浣撶粨鏋勩€佹瘮渚嬪拰瑙嗚鏋勫浘涓嶅彉
-- 鍙繘琛岄鏍艰浆鎹㈠拰鏉愯川娓叉煋锛屼笉鏀瑰彉寤虹瓚褰㈡€?
-銆愰鏍艰浆鎹㈣姹傘€?灏嗗簳鍥維U妯″瀷杞崲涓篗IR鍥介檯绔炶禌椋庢牸鐨勫缓绛戦笩鐬版晥鏋滃浘
+[Image Parameters]
+- Aspect ratio: 16:9
+- Resolution: 2K
+- Count: Generate only 1 image
 
-銆愮敾闈㈣姹傘€?- 鏃ユ櫙鏅埆
-- 鍥鹃潰鏁翠綋鎰熴€佹皼鍥存劅寮?- 寤虹瓚绔嬮潰涓虹幓鐠冨箷澧欏拰閲戝睘鏍兼爡鏉愯川
-- 鐢婚潰杩滃鏈夎嫢闅愯嫢鐜扮殑钖勯浘
-- 澧炲姞閫傚綋鐨勯厤鏅汉
-- 鍥鹃潰宸﹀彸涓や晶澧炲姞灏戦噺鏍戞湪鍙婃鐗?- 鏁翠綋鐢婚潰鍛堢幇鍑轰笓涓氬缓绛戞憚褰辩殑鍏夌嚎鏁堟灉
-- 鍏峰瓒呴珮娓呭垎杈ㄧ巼鐨勫浘鍍忕粏鑺?
-銆愯壊璋冧笌鑹插僵銆?- 浠ラ珮璋冪殑鐧借壊鍜屾祬鐏拌壊涓哄熀璋冿紝灞€閮ㄧ偣缂€棰滆壊
-- 鏁翠綋鑹茶皟鏄庝寒绾噣锛岀獊鏄惧缓绛戠殑瑙嗚涓績
-- 鍛堢幇鐜颁唬銆佹椿鍔涗笖娓呯埥鐨勮壊褰╂劅鐭?
-銆愯〃鐜颁笌椋庢牸銆?- 閲囩敤鍟嗕笟鍐欏疄娓叉煋椋庢牸
-- 鐢婚潰寮鸿皟寤虹瓚鍑犱綍褰㈡€佺殑娓呮櫚搴?- 缁撳悎澶ч噺鍏锋湁鐢熸椿姘旀伅鐨勪汉鏅礌鏉?- 閫氳繃浜鸿鐐规瀯鍥惧寮哄満鏅殑娌夋蹈鎰熶笌绀句細鍙備笌鎰?
-銆愮幆澧冧笌閰嶆櫙銆?- 缁嗚吇鐨勫煄甯傚箍鍦虹幆澧?- 鍓嶆櫙閫氳繃鍐欏疄鐨勭煶鏉愰摵瑁呮媺寮€绌洪棿灞傛
-- 涓櫙甯冪疆缁挎涓庡叕鍏辫鏂?- 钀ラ€犲嚭绻佸崕銆佸疁浜轰笖鍏锋湁寮€鏀炬€х殑绀惧尯鍟嗕笟姘涘洿
+[Base Image Reference]
+- Must use provided reference image as base
+- Strictly maintain the main structure, proportion, and viewpoint of the building in reference image
+- Only perform style transfer and material rendering, do not change building form
 
-銆愬ぉ姘斾笌鏃堕棿銆?- 妯℃嫙鏄庝寒銆侀€氶€忕殑鏅寸┖鐜
-- 澶╃┖澶ч潰绉暀鐧斤紝鍛堢幇鍑轰竴绉嶈繎浼艰繃鏇濈殑楂樺厜鎰?- 鍏夊奖鍏崇郴鏌斿拰锛岄槾褰遍€氶€忚€屼笉娌夐噸
-- 灞曠幇鍏呰冻鐨勮嚜鐒堕噰鍏夋晥鏋?
-銆愬叧閿彁閱掋€?杩欐槸鍥剧敓鍥句换鍔★紙image-to-image锛夛紝蹇呴』浠ュ弬鑰冨浘鐗囦腑鐨勫缓绛戞ā鍨嬩负鍩虹锛?寤虹瓚鐨勪富浣撶粨鏋勩€佹瘮渚嬪拰瑙嗚鏋勫浘蹇呴』涓庡弬鑰冨浘鐗囧畬鍏ㄤ竴鑷达紝涓嶅彲鏀瑰彉寤虹瓚褰㈡€併€?```
+[Style Transfer Requirements]
+Convert the base image SU model to MIR international competition style architectural bird's-eye render
+
+[Image Requirements]
+- Daytime scene
+- Strong overall feeling and atmosphere
+- Building facade: glass curtain wall and metal lattice materials
+- Subtle mist in the distance
+- Appropriate people in the scene
+- Trees and plants on both sides of the image
+- Professional architectural photography lighting effect
+- Ultra high resolution image details
+
+[Color and Tone]
+- High-key white and light gray as base, local color accents
+- Bright and pure overall tone, highlighting the visual center of the building
+- Modern, vibrant, and fresh color perception
+
+[Expression and Style]
+- Commercial realistic rendering style
+- Emphasize clarity of architectural geometric forms
+- Rich people and scene materials with life atmosphere
+- Enhance scene immersion and social participation through human viewpoint composition
+
+[Environment and Scenery]
+- Delicate urban plaza environment
+- Foreground opens up spatial layers with realistic stone paving
+- Mid-ground with green plants and public facilities
+- Create a prosperous, pleasant, and open community commercial atmosphere
+
+[Weather and Time]
+- Simulate bright, transparent sunny environment
+- Large area of white sky, presenting a near-overexposed highlight feeling
+- Soft light and shadow relationship, transparent shadows without heaviness
+- Sufficient natural daylight effect
+
+[Key Reminder]
+This is an image-to-image task, must use the building model in reference image as base,
+building main structure, proportion, and viewpoint must be exactly the same as reference image, cannot change building form.
+```
 
 ---
 
-## MIR绔炶禌椋庢牸妯℃澘
+## MIR Competition Style Template
 
-閫傜敤浜庯細绔炶禌鏁堟灉鍥俱€佹姇鏍囨枃浠躲€侀珮绔睍绀?
+Applicable: Competition renders, bidding documents, high-end presentations
+
 ```
-鍙傝€冨浘鐗囷細<OSS URL>
+Reference image: <OSS-URL>
 
-銆愰噸瑕併€戣涓ユ牸鎸夌収浠ヤ笅瑕佹眰鐢熸垚涓€寮犲浘鐗囷細
+[Important] Please strictly generate an image according to the following requirements:
 
-銆愭ā鍨嬮€夋嫨銆?- 妯″瀷锛歀ib Nano pro
-- 椋庢牸棰勮锛歁IR鍥介檯绔炶禌椋?
-銆愬浘鐗囧弬鏁般€?- 姣斾緥锛?6:9
-- 鍒嗚鲸鐜囷細2K
-- 鏁伴噺锛?寮?
-銆愬簳鍥惧弬鑰冦€?涓ユ牸淇濇寔鍙傝€冨浘鐗囦腑寤虹瓚鐨勪富浣撶粨鏋勩€佹瘮渚嬪拰瑙嗚涓嶅彉
+[Model Selection]
+- Model: Lib Nano pro
+- Style preset: MIR International Competition Style
 
-銆怣IR绔炶禌椋庤姹傘€?- 楂樿皟鐧借壊娴呯伆鍩鸿皟锛屾槑浜函鍑€
-- 闈欒哀楂樼骇鐨勭數褰辨劅姘涘洿
-- 鏌斿拰婕皠鍏夛紝鏃犵‖闃村奖
-- 杩滃娣℃贰钖勯浘澧炲姞绾垫繁鎰?- 涓撲笟寤虹瓚鎽勫奖鐨勫厜绾挎晥鏋?- 寮鸿皟寤虹瓚鍑犱綍褰㈡€佺殑娓呮櫚搴?
-銆愯壊璋冦€?- 浣庨ケ鍜屼腑鎬х伆
-- 鏆栧喎瀵规瘮鎭板綋
-- 灞€閮ㄧ偣缂€鑹?
-銆愭潗璐ㄣ€?- 鐪熷疄璐ㄦ劅锛屾湁缁嗗井鍒嗙紳
-- 闈炲畬缇庡鏂欐劅
-- 鐜荤拑骞曞銆侀噾灞炴牸鏍呫€佹湪璐ㄦ牸鏍呭悇鏈変笉鍚岃川鎰?
-銆愰厤鏅€?- 閫傚綋浜虹墿鐐圭紑锛屼笉鎶㈠缓绛戜富浣?- 缁挎銆佹爲鏈ㄥ鍔犵敓鏈?- 鍓嶆櫙鐭虫潗閾鸿鎷夊紑灞傛
+[Image Parameters]
+- Aspect ratio: 16:9
+- Resolution: 2K
+- Count: 1 image
 
-銆愬叧閿彁閱掋€?鍥剧敓鍥句换鍔★紝蹇呴』浠ュ弬鑰冨浘鐗囦负鍩虹鐢熸垚锛屽缓绛戝舰鎬佷笉鍙敼鍙樸€?```
+[Base Image Reference]
+Strictly maintain the main structure, proportion, and viewpoint of the building in reference image unchanged
+
+[MIR Competition Style Requirements]
+- High-key white light gray base, bright and pure
+- Serene, high-end, cinematic atmosphere
+- Soft diffuse light, no hard shadows
+- Subtle mist in distance for depth
+- Professional architectural photography lighting
+- Emphasize clarity of architectural geometric forms
+
+[Color]
+- Low saturation neutral gray
+- Appropriate warm-cold contrast
+- Local accent colors
+
+[Material]
+- Real texture, subtle seams
+- Non-perfect plastic look
+- Glass curtain wall, metal lattice, wood lattice each with different texture
+
+[Scenery]
+- Appropriate people, not overshadowing main building
+- Green plants, trees for vitality
+- Foreground stone paving for layer
+
+[Key Reminder]
+Image-to-image task, must use reference image as base, building form cannot be changed.
+```
 
 ---
 
-## 鍟嗕笟鍐欏疄椋庢牸妯℃澘
+## Commercial Realistic Style Template
 
-閫傜敤浜庯細鎴垮湴浜у睍绀恒€佸晢涓氶」鐩€佸浼犵墿鏂?
+Applicable: Real estate displays, commercial projects, promotional materials
+
 ```
-鍙傝€冨浘鐗囷細<OSS URL>
+Reference image: <OSS-URL>
 
-銆愰噸瑕併€戣涓ユ牸鎸夌収浠ヤ笅瑕佹眰鐢熸垚涓€寮犲浘鐗囷細
+[Important] Please strictly generate an image according to the following requirements:
 
-銆愭ā鍨嬮€夋嫨銆?- 妯″瀷锛歀ib Nano pro
-- 椋庢牸锛氬晢涓氬啓瀹炴覆鏌?
-銆愬浘鐗囧弬鏁般€?- 姣斾緥锛?6:9
-- 鍒嗚鲸鐜囷細2K
-- 鏁伴噺锛?寮?
-銆愬簳鍥惧弬鑰冦€?涓ユ牸淇濇寔鍙傝€冨浘鐗囦腑寤虹瓚鐨勪富浣撶粨鏋勩€佹瘮渚嬪拰瑙嗚涓嶅彉
+[Model Selection]
+- Model: Lib Nano pro
+- Style: Commercial Realistic Rendering
 
-銆愬晢涓氬啓瀹炶姹傘€?- 澶ч噺鍏锋湁鐢熸椿姘旀伅鐨勪汉鏅礌鏉?- 绻佸崕銆佸疁浜虹殑绀惧尯鍟嗕笟姘涘洿
-- 鍩庡競骞垮満鐜
-- 鍓嶆櫙鍐欏疄鐭虫潗閾鸿
-- 涓櫙缁挎涓庡叕鍏辫鏂?
-銆愯壊璋冦€?- 鏄庝寒绾噣锛岄珮璋冪収鏄?- 鐜颁唬銆佹椿鍔涗笖娓呯埥
-- 鐧借壊娴呯伆涓轰富鍩鸿皟
+[Image Parameters]
+- Aspect ratio: 16:9
+- Resolution: 2K
+- Count: 1 image
 
-銆愬厜褰便€?- 鏌斿拰闃村奖锛岄€氶€忚€屼笉娌夐噸
-- 鍏呰冻鐨勮嚜鐒堕噰鍏?- 鏄庝寒閫氶€忕殑鏅寸┖鐜
+[Base Image Reference]
+Strictly maintain the main structure, proportion, and viewpoint of the building in reference image unchanged
 
-銆愬叧閿彁閱掋€?鍥剧敓鍥句换鍔★紝蹇呴』浠ュ弬鑰冨浘鐗囦负鍩虹鐢熸垚銆?```
+[Commercial Realistic Requirements]
+- Rich people and scene materials with life atmosphere
+- Prosperous, pleasant community commercial atmosphere
+- Urban plaza environment
+- Foreground realistic stone paving
+- Mid-ground green plants and public facilities
+
+[Color]
+- Bright and pure, high-key lighting
+- Modern, vibrant, and fresh
+- White and light gray as main base
+
+[Light and Shadow]
+- Soft shadows, transparent without heaviness
+- Sufficient natural daylight
+- Bright and transparent sunny environment
+
+[Key Reminder]
+Image-to-image task, must use reference image as base.
+```
 
 ---
 
-## 鍖楁鑷劧椋庢牸妯℃澘
+## Nordic Natural Style Template
 
-閫傜敤浜庯細浣忓畢銆佹．鏋楀缓绛戙€佷翰杩戣嚜鐒堕」鐩?
+Applicable: Residential, forest architecture, nature-proximity projects
+
 ```
-鍙傝€冨浘鐗囷細<OSS URL>
+Reference image: <OSS-URL>
 
-銆愰噸瑕併€戣涓ユ牸鎸夌収浠ヤ笅瑕佹眰鐢熸垚涓€寮犲浘鐗囷細
+[Important] Please strictly generate an image according to the following requirements:
 
-銆愭ā鍨嬮€夋嫨銆?- 妯″瀷锛歀ib Nano pro
+[Model Selection]
+- Model: Lib Nano pro
 
-銆愬浘鐗囧弬鏁般€?- 姣斾緥锛?6:9
-- 鍒嗚鲸鐜囷細2K
-- 鏁伴噺锛?寮?
-銆愬簳鍥惧弬鑰冦€?涓ユ牸淇濇寔鍙傝€冨浘鐗囦腑寤虹瓚鐨勪富浣撶粨鏋勩€佹瘮渚嬪拰瑙嗚涓嶅彉
+[Image Parameters]
+- Aspect ratio: 16:9
+- Resolution: 2K
+- Count: 1 image
 
-銆愬寳娆ц嚜鐒堕鏍艰姹傘€?- 浣庨ケ鍜屽ぇ鍦拌壊绯伙紙娣辩孩瑜愩€佹繁缁裤€佽嫈钘撶豢锛?- 瀹侀潤娌绘剤锛屽ぉ浜哄悎涓€姘涘洿
-- 鏂戦┏杩囨护鍏夛紝鏌斿拰婕弽灏?- 鏅ㄦ槒姘涘洿鎰?
-銆愭潗璐ㄣ€?- 鍨傜洿鏈ㄦ牸鏍呭搼鍏夎川鎰?- 鐜荤拑娓╁铏氬疄瀵规瘮
-- 鑷劧鏉愯川涓轰富
+[Base Image Reference]
+Strictly maintain the main structure, proportion, and viewpoint of the building in reference image unchanged
 
-銆愮幆澧冦€?- 浜轰笌鑷劧鍜岃皭鍏辩敓
-- 妫灄/缁垮湴鐜粫
-- 鑻ラ殣鑻ョ幇鐨勮杽闆?
-銆愬叧閿彁閱掋€?鍥剧敓鍥句换鍔★紝蹇呴』浠ュ弬鑰冨浘鐗囦负鍩虹鐢熸垚銆?```
+[Nordic Natural Style Requirements]
+- Low saturation earth tones (deep red-brown, dark green, moss green)
+- Serene, healing, harmony between man and nature
+- Dappled filtered light, soft diffuse reflection
+- Dawn/dusk atmosphere
+
+[Material]
+- Vertical wood lattice matte finish
+- Glass greenhouse contrast
+- Natural materials mainly
+
+[Environment]
+- Harmony between man and nature
+- Surrounded by forest/green space
+- Subtle mist
+
+[Key Reminder]
+Image-to-image task, must use reference image as base.
+```
 
 ---
 
-## Prompt鏋勫缓妫€鏌ユ竻鍗?
-鍙戦€乸rompt鍓嶅繀妫€锛?
-- [ ] 搴曞浘URL鏀惧湪prompt鏈€寮€澶达紝鏍煎紡涓?`鍙傝€冨浘鐗囷細<URL>`
-- [ ] 鏄庣‘鏍囨敞銆愬簳鍥惧弬鑰冦€戣姹備繚鎸佸缓绛戠粨鏋勬瘮渚嬭瑙掍笉鍙?- [ ] 鏄庣‘寮鸿皟杩欐槸**鍥剧敓鍥句换鍔★紙image-to-image锛?*
-- [ ] 鎵€鏈夋帹閫佷俊鎭粠**鏈鐢熸垚缁撴灉**涓彁鍙栵紝涓嶄緷璧栧巻鍙?- [ ] prompt涓病鏈夎嚜宸辩紪閫犵殑椋庢牸鎻忚堪锛堝"瓒呭啓瀹炪€?K"绛変笉鍏蜂綋鐨勮瘝锛?
+## Prompt Building Checklist
+
+Before sending prompt, verify:
+
+- [ ] Base image URL at prompt beginning, format: `Reference image: <URL>`
+- [ ] [Base Image Reference] requirements marked: keep building structure proportion viewpoint unchanged
+- [ ] [Key Reminder] emphasized: This is an image-to-image task
+- [ ] All push info extracted from current generation result, not from history
+- [ ] No self-invented style descriptions in prompt (like "ultra realistic, 8K" etc.)
