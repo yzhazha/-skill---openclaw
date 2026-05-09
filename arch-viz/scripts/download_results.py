@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""涓嬭浇鐢熸垚缁撴灉锛氫粠浼氳瘽涓彁鍙栨墍鏈夊浘鐗?瑙嗛 URL 骞舵壒閲忎笅杞藉埌鏈湴"""
+"""Download generation results: Extract all image/video URLs from session and batch download to local"""
 
 import argparse
 import json
@@ -15,7 +15,7 @@ from _common import query_session
 
 
 def extract_urls_from_messages(messages):
-    """浠庝細璇濇秷鎭腑鎻愬彇鎵€鏈夊浘鐗囧拰瑙嗛缁撴灉 URL"""
+    """Extract all image and video result URLs from session messages"""
     urls = []
     url_pattern = re.compile(r'https://libtv-res\.liblib\.art/[^\s"\'<>]+\.(?:png|jpg|jpeg|webp|mp4|mov|webm)')
 
@@ -24,7 +24,7 @@ def extract_urls_from_messages(messages):
         if not content or not isinstance(content, str):
             continue
 
-        # 浠?task_result 涓彁鍙栵紙toolmsg 杩斿洖鐨勭粨鏋滐級
+        # Extract from task_result (toolmsg returned results)
         if msg.get("role") == "tool":
             try:
                 data = json.loads(content)
@@ -40,12 +40,12 @@ def extract_urls_from_messages(messages):
             except (json.JSONDecodeError, AttributeError):
                 pass
 
-        # 浠?assistant 鏂囨湰娑堟伅涓彁鍙?URL
+        # Extract URL from assistant text messages
         if msg.get("role") == "assistant":
             found = url_pattern.findall(content)
             urls.extend(found)
 
-    # 鍘婚噸淇濆簭
+    # Deduplicate while preserving order
     seen = set()
     unique = []
     for u in urls:
@@ -56,7 +56,7 @@ def extract_urls_from_messages(messages):
 
 
 def download_file(url, filepath):
-    """涓嬭浇鍗曚釜鏂囦欢"""
+    """Download single file"""
     req = urllib.request.Request(url, headers={"User-Agent": "LibTV-Skill/1.0"})
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
@@ -73,30 +73,31 @@ def download_file(url, filepath):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="涓嬭浇浼氳瘽涓敓鎴愮殑鍥剧墖/瑙嗛鍒版湰鍦?,
+        description="Download generated images/videos from session to local",
         epilog="""
-浣跨敤鏂瑰紡:
-  # 浠庝細璇濊嚜鍔ㄦ彁鍙栧苟涓嬭浇鎵€鏈夌粨鏋?  python3 download_results.py SESSION_ID
+Usage:
+  # Extract and download all results from session
+  python3 download_results.py SESSION_ID
 
-  # 鎸囧畾杈撳嚭鐩綍
+  # Specify output directory
   python3 download_results.py SESSION_ID --output-dir ~/Desktop/my_project
 
-  # 鎸囧畾鏂囦欢鍚嶅墠缂€
+  # Specify filename prefix
   python3 download_results.py SESSION_ID --prefix "storyboard"
 
-  # 鐩存帴涓嬭浇鎸囧畾 URL 鍒楄〃
+  # Directly download specified URL list
   python3 download_results.py --urls URL1 URL2 URL3 --output-dir ./output
         """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("session_id", nargs="?", default="", help="浼氳瘽 ID锛岃嚜鍔ㄦ彁鍙栬浼氳瘽鎵€鏈夌敓鎴愮粨鏋滅殑 URL")
-    parser.add_argument("--urls", nargs="+", default=[], help="鐩存帴鎸囧畾瑕佷笅杞界殑 URL 鍒楄〃锛堜笉闇€瑕?session_id锛?)
-    parser.add_argument("--output-dir", default="", help="杈撳嚭鐩綍锛堥粯璁?~/Downloads/libtv_results/锛?)
-    parser.add_argument("--prefix", default="", help="鏂囦欢鍚嶅墠缂€锛堝 'storyboard' 鈫?storyboard_01.png锛?)
-    parser.add_argument("--workers", type=int, default=5, help="骞惰涓嬭浇绾跨▼鏁帮紙榛樿 5锛?)
+    parser.add_argument("session_id", nargs="?", default="", help="Session ID, auto-extract all generation result URLs")
+    parser.add_argument("--urls", nargs="+", default=[], help="Directly specify URL list to download (no session_id needed)")
+    parser.add_argument("--output-dir", default="", help="Output directory (default ~/Downloads/libtv_results/)")
+    parser.add_argument("--prefix", default="", help="Filename prefix (e.g., 'storyboard' -> storyboard_01.png)")
+    parser.add_argument("--workers", type=int, default=5, help="Parallel download threads (default 5)")
     args = parser.parse_args()
 
-    # 鏀堕泦 URL
+    # Collect URLs
     urls = list(args.urls)
     if args.session_id:
         data = query_session(args.session_id)
@@ -105,14 +106,14 @@ def main():
         urls.extend(extracted)
 
     if not urls:
-        print(json.dumps({"error": "鏈壘鍒板彲涓嬭浇鐨勫浘鐗?瑙嗛 URL", "downloaded": []}, ensure_ascii=False, indent=2))
+        print(json.dumps({"error": "No downloadable image/video URLs found", "downloaded": []}, ensure_ascii=False, indent=2))
         sys.exit(1)
 
-    # 鍑嗗杈撳嚭鐩綍
+    # Prepare output directory
     output_dir = args.output_dir or os.path.expanduser("~/Downloads/libtv_results")
     os.makedirs(output_dir, exist_ok=True)
 
-    # 鏋勫缓涓嬭浇浠诲姟
+    # Build download tasks
     tasks = []
     for i, url in enumerate(urls, 1):
         ext = os.path.splitext(url.split("?")[0])[-1] or ".png"
@@ -123,7 +124,7 @@ def main():
         filepath = os.path.join(output_dir, filename)
         tasks.append((url, filepath))
 
-    # 骞惰涓嬭浇
+    # Parallel download
     results = []
     errors = []
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
@@ -135,7 +136,7 @@ def main():
             else:
                 results.append(fp)
 
-    # 鎸夋枃浠跺悕鎺掑簭杈撳嚭
+    # Sort results by filename
     results.sort()
 
     output = {
