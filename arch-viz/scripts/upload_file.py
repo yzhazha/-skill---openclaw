@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""涓婁紶鍥剧墖/瑙嗛鍒?OSS锛歅OST /openapi/upload锛坢ultipart/form-data锛?""
+"""Upload image/video to OSS: POST /openapi/upload (multipart/form-data)"""
 
 import argparse
 import json
@@ -13,34 +13,37 @@ import urllib.error
 sys.path.insert(0, os.path.dirname(__file__))
 from _common import IM_BASE, ACCESS_KEY
 
-# 鍏佽鐨?MIME 绫诲瀷鍓嶇紑
+# Allowed MIME type prefixes
 ALLOWED_PREFIXES = ("image/", "video/")
 
 
 def upload_file(file_path: str) -> dict:
     """
-    涓婁紶鏈湴鏂囦欢鍒?agent-im OSS銆?    杩斿洖 data: { url }銆?    """
+    Upload local file to agent-im OSS.
+    Returns data: { url }.
+    """
     if not os.path.isfile(file_path):
-        print(f"閿欒锛氭枃浠朵笉瀛樺湪: {file_path}", file=sys.stderr)
+        print(f"Error: File not found: {file_path}", file=sys.stderr)
         sys.exit(1)
 
-    # 妫€鏌?MIME 绫诲瀷
+    # Check MIME type
     mime_type, _ = mimetypes.guess_type(file_path)
     if mime_type and not any(mime_type.startswith(p) for p in ALLOWED_PREFIXES):
-        print(f"閿欒锛氫笉鏀寔鐨勬枃浠剁被鍨? {mime_type}锛屼粎鏀寔鍥剧墖鍜岃棰?, file=sys.stderr)
+        print(f"Error: Unsupported file type: {mime_type}, only image and video supported", file=sys.stderr)
         sys.exit(1)
 
-    # 鏋勫缓 multipart/form-data 璇锋眰浣?    boundary = f"----PythonUpload{uuid.uuid4().hex}"
+    # Build multipart/form-data request
+    boundary = f"----PythonUpload{uuid.uuid4().hex}"
     filename = os.path.basename(file_path)
 
     body_parts = []
 
-    # accessKey 瀛楁
+    # accessKey field
     body_parts.append(f"--{boundary}\r\n".encode())
     body_parts.append(b'Content-Disposition: form-data; name="accessKey"\r\n\r\n')
     body_parts.append(f"{ACCESS_KEY}\r\n".encode())
 
-    # file 瀛楁
+    # file field
     content_type = mime_type or "application/octet-stream"
     body_parts.append(f"--{boundary}\r\n".encode())
     body_parts.append(
@@ -51,7 +54,7 @@ def upload_file(file_path: str) -> dict:
         body_parts.append(f.read())
     body_parts.append(b"\r\n")
 
-    # 缁撴潫杈圭晫
+    # End boundary
     body_parts.append(f"--{boundary}--\r\n".encode())
 
     data = b"".join(body_parts)
@@ -72,33 +75,33 @@ def upload_file(file_path: str) -> dict:
             return result.get("data", {})
     except urllib.error.HTTPError as e:
         err_body = e.read().decode("utf-8") if e.fp else ""
-        print(f"API 閿欒 {e.code}: {err_body}", file=sys.stderr)
+        print(f"API Error {e.code}: {err_body}", file=sys.stderr)
         sys.exit(1)
     except urllib.error.URLError as e:
-        print(f"缃戠粶閿欒: {e.reason}", file=sys.stderr)
+        print(f"Network Error: {e.reason}", file=sys.stderr)
         sys.exit(1)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="涓婁紶鍥剧墖鎴栬棰戞枃浠跺埌 OSS",
+        description="Upload image or video file to OSS",
         epilog="""
-鐜鍙橀噺:
-  LIBTV_ACCESS_KEY  蹇呭～锛孊earer 閴存潈
-  OPENAPI_IM_BASE 鎴?IM_BASE_URL  鍙€夛紝榛樿 https://im.liblib.tv
+Environment Variables:
+  LIBTV_ACCESS_KEY  Required, Bearer Auth
+  OPENAPI_IM_BASE or IM_BASE_URL  Optional, default https://im.liblib.tv
 
-绀轰緥:
-  # 涓婁紶鍥剧墖
+Examples:
+  # Upload image
   python3 upload_file.py /path/to/image.png
 
-  # 涓婁紶瑙嗛
+  # Upload video
   python3 upload_file.py /path/to/video.mp4
         """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
         "file",
-        help="瑕佷笂浼犵殑鍥剧墖鎴栬棰戞枃浠惰矾寰?,
+        help="Path to image or video file to upload",
     )
     args = parser.parse_args()
 
@@ -106,7 +109,7 @@ def main():
     oss_url = data.get("url", "")
 
     if not oss_url:
-        print("閿欒锛氭湭杩斿洖 OSS 鍦板潃", file=sys.stderr)
+        print("Error: No OSS URL returned", file=sys.stderr)
         sys.exit(1)
 
     out = {"url": oss_url}
