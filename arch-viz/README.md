@@ -1,122 +1,158 @@
 # Arch-Viz Skill
 
-寤虹瓚鍙鍖朅IGC宸ヤ綔娴丼kill - 閫氳繃libtv骞冲彴鐢熸垚涓撲笟寤虹瓚鏁堟灉鍥惧拰鍔ㄧ敾銆?
-## 鍔熻兘姒傝堪
+Architectural Visualization AIGC Workflow Skill - Generate professional architectural renders and animation via libtv platform.
 
-- **鍥剧敓鍥炬覆鏌?*锛氬皢SU妯″瀷/绾挎鍥捐浆鎹负MIR椋?绔炶禌椋?鍟嗕笟鍐欏疄绛変笓涓氭晥鏋滃浘
-- **椋庢牸鎶婃帶**锛氬唴缃绉嶅缓绛戣〃鐜伴鏍兼ā鏉?- **鏁堟灉鍥惧垎鏋?*锛氫粠7涓淮搴︿笓涓氬垎鏋愭晥鏋滃浘锛屾彁鍑烘敼杩涙剰瑙?
-## 瀹夎
+## Overview
 
-### 1. 瀹夎渚濊禆
+- **Image-to-Image Render**: Convert SU models/wireframes to MIR/competition/commercial professional renders
+- **Style Control**: Built-in multiple architectural presentation style templates
+- **Render Analysis**: Professional 7-dimension analysis of renders with improvement suggestions
 
-鏈琒kill闇€瑕丳ython 3鐜锛屾棤闇€棰濆瀹夎渚濊禆鍖咃紙浣跨敤Python鏍囧噯搴擄級銆?
+## Installation
+
+### 1. Install Dependencies
+
+This skill requires Python 3 environment. No additional packages needed (uses Python standard library).
+
 ```bash
-# 纭繚 python3 鍙敤
+# Ensure python3 is available
 python3 --version
 ```
 
-### 2. 閰嶇疆API Key
+### 2. Configure API Key
 
 ```bash
-# 璁剧疆 libtv Access Key
-export LIBTV_ACCESS_KEY="your-libtv-access-key"
-
-# 鍙€夛細鑷畾涔堿PI鍦板潃锛堜竴鑸笉闇€瑕侊級
-export OPENAPI_IM_BASE="https://im.liblib.tv"
+# Set libtv Access Key
+export LIBTV_ACCESS_KEY="your-api-key"
 ```
 
-### 3. 鏀剧疆Skill鏂囦欢
+### 3. Place Skill Files
 
-灏?`arch-viz` 鐩綍鏀剧疆鍒?OpenClaw 鐨?skill 鍔犺浇鐩綍锛?
+Place `arch-viz` directory into OpenClaw's skill loading directory:
+
 ```bash
-# 鏀剧疆鍒扮敤鎴穝kill鐩綍
+# Place in user skill directory
 cp -r arch-viz ~/.openclaw/plugin-skills/
-
-# 鎴栨斁缃埌鍏ㄥ眬skill鐩綍
-cp -r arch-viz /path/to/openclaw/skills/
 ```
 
-### 4. 楠岃瘉瀹夎
+### 4. Verify Installation
 
-鍦∣penClaw涓彂閫佹秷鎭祴璇晄kill鏄惁鍔犺浇锛?
+Send a test message in OpenClaw:
+
 ```
-鐢熸垚涓€寮犲缓绛戞晥鏋滃浘娴嬭瘯
+Generate an architectural render test
 ```
 
-## 鐩綍缁撴瀯
+## Directory Structure
 
 ```
 arch-viz/
-鈹溾攢鈹€ SKILL.md                    # Skill涓绘枃浠讹紙AI璇诲彇锛?鈹溾攢鈹€ README.md                   # 鏈枃浠讹紙浜虹被浣跨敤锛?鈹溾攢鈹€ scripts/                    # Python鑴氭湰
-鈹?  鈹溾攢鈹€ _common.py              # 鍏叡妯″潡
-鈹?  鈹溾攢鈹€ change_project.py       # 鍒囨崲椤圭洰鐢诲竷
-鈹?  鈹溾攢鈹€ create_session.py       # 鍒涘缓浼氳瘽/鍙戦€佷换鍔?鈹?  鈹溾攢鈹€ download_results.py     # 涓嬭浇鐢熸垚缁撴灉
-鈹?  鈹溾攢鈹€ query_session.py        # 鏌ヨ浼氳瘽杩涘睍
-鈹?  鈹斺攢鈹€ upload_file.py          # 涓婁紶搴曞浘
-鈹斺攢鈹€ references/                 # 鍙傝€冩枃妗?    鈹溾攢鈹€ libtv-workflow.md       # LibTV API瀹屾暣宸ヤ綔娴?    鈹溾攢鈹€ prompt-templates.md      # Prompt妯℃澘搴?    鈹斺攢鈹€ render-style-guide.md   # 鏁堟灉鍥鹃鏍兼寚鍗?```
-
-## 浣跨敤鏂规硶
-
-### 鏂瑰紡1锛氫笂浼犲簳鍥剧敓鎴愭晥鏋滃浘
-
-```
-1. 鍙戦€佸簳鍥剧粰AI
-2. 璇存槑鎯宠鐨勯鏍硷紙濡?MIR绔炶禌椋?銆?鍟嗕笟鍐欏疄"锛?3. AI鑷姩鎵ц瀹屾暣宸ヤ綔娴佸苟浜や粯缁撴灉
+|-- SKILL.md                    # Skill main file (AI reads)
+|-- README.md                   # This file
+|-- scripts/                   # Python scripts
+|   |-- _common.py            # Common module
+|   |-- change_project.py     # Switch project canvas
+|   |-- create_session.py     # Create session/send task
+|   |-- download_results.py   # Download generation results
+|   |-- query_session.py      # Query session progress
+|   |-- upload_file.py        # Upload base image
+|-- references/               # Reference documents
+    |-- libtv-workflow.md     # LibTV API complete workflow
+    |-- prompt-templates.md    # Prompt template library
+    |-- render-style-guide.md  # Render style guide
 ```
 
-### 鏂瑰紡2锛氳AI鍒嗘瀽鏁堟灉鍥?
-```
-鍙戦€佹晥鏋滃浘缁橝I锛岃"甯垜鍒嗘瀽杩欏紶鏁堟灉鍥?
-AI浠?涓淮搴︾粰鍑轰笓涓氭敼杩涙剰瑙?```
+## Usage
 
-### 鏂瑰紡3锛氱洿鎺ユ弿杩伴渶姹?
-```
-"甯垜鐢熸垚涓€寮犲浘涔﹂寤虹瓚鏁堟灉鍥撅紝绔炶禌椋庯紝16:9"
-锛堥檮涓婂簳鍥撅級
-```
-
-## 鏍稿績宸ヤ綔娴佺▼
+### Method 1: Upload Base Image for Render
 
 ```
-1. change_project.py     鈫?鏂板缓椤圭洰鐢诲竷
-2. upload_file.py       鈫?涓婁紶搴曞浘
-3. create_session.py    鈫?鍙戦€佺敓鎴愪换鍔?4. query_session.py     鈫?杞鏌ヨ缁撴灉锛堟瘡8绉掞級
-5. download_results.py  鈫?涓嬭浇缁撴灉
-6. 灞曠ず缁欑敤鎴?          鈫?MEDIA + 閾炬帴
+1. Send base image to AI
+2. Specify desired style (e.g., "MIR competition style", "commercial realistic")
+3. AI automatically executes complete workflow and delivers results
 ```
 
-璇﹁ `references/libtv-workflow.md`銆?
-## Prompt妯℃澘
+### Method 2: AI Analyzes Render
 
-鏈琒kill鍐呯疆澶氱鎴愬姛prompt妯℃澘锛屾兜鐩栵細
+```
+Send render to AI, say "Help me analyze this render"
+AI provides professional improvement suggestions from 7 dimensions
+```
 
-- MIR鍥介檯绔炶禌椋?- 鍟嗕笟鍐欏疄娓叉煋椋?- 鍖楁鑷劧涓讳箟椋?- 閫氱敤鍥剧敓鍥炬ā鏉?
-璇﹁ `references/prompt-templates.md`銆?
-## 鏁堟灉鍥鹃鏍煎弬鑰?
-涓讳汉鍋忓ソ鐨勬晥鏋滃浘椋庢牸鏍稿績鍏抽敭璇嶏細
+### Method 3: Direct Description
 
-- **鑹茶皟**锛氫綆楗卞拰涓€х伆銆佸共鍑€閫氶€?- **鍏夌嚎**锛氳嚜鐒舵极灏勩€佹煍鍜屾棤纭槾褰?- **姘涘洿**锛氶潤璋ч珮绾с€佺數褰辨劅
-- **鏉愯川**锛氱湡瀹炶川鎰熴€佹湁缁嗗井鍒嗙紳
-- **闆炬皵**锛氳繙澶勬贰娣¤杽闆惧鍔犵旱娣?- **閰嶆櫙**锛氶€傚綋浜虹墿銆佷笉鎶㈠缓绛戜富浣?
-璇﹁ `references/render-style-guide.md`銆?
-## 鏁堟灉鍥惧垎鏋愭柟娉?
-AI浼氫粠浠ヤ笅7涓淮搴﹀垎鏋愭晥鏋滃浘锛?
-1. **缁撴瀯涓庢瘮渚?* - 寤虹瓚缁撴瀯銆佹瘮渚嬨€佸舰鎬?2. **鍏夊奖閫昏緫** - 鍏夊奖鐪熷疄鎬с€佹皼鍥淬€侀槾褰?3. **鏉愯川璐ㄦ劅** - 鏉愯川鐪熷疄鎬с€佸垎缂濈粏鑺?4. **鑹茶皟涓庡崗璋?* - 鑹茶皟缁熶竴鎬с€佸喎鏆栧姣?5. **鐢婚潰灞傛** - 绾垫繁鎰熴€佹櫙娣便€侀浘姘?6. **閰嶆櫙涓庢瀯鍥?* - 浜虹墿/妞嶇墿/閰嶆櫙銆佹瀯鍥惧钩琛?7. **鏁翠綋姘涘洿** - 鐢靛奖鎰熴€佹墦鍔ㄦ€с€佹暣浣撴劅
+```
+"Generate an architectural render of a library, competition style, 16:9"
+(attach base image)
+```
 
-## 甯歌闂
+## Core Workflow
 
-**Q: 鎻愮ず"LIBTV_ACCESS_KEY鏈缃?锛?*
+```
+1. change_project.py    -> New project canvas
+2. upload_file.py      -> Upload base image
+3. create_session.py   -> Send generation task
+4. query_session.py    -> Poll for results (every 8 seconds)
+5. download_results.py -> Download results
+6. Display to user     -> MEDIA + link
+```
+
+See `references/libtv-workflow.md` for details.
+
+## Prompt Templates
+
+This skill includes multiple successful prompt templates:
+
+- MIR International Competition Style
+- Commercial Realistic Style
+- Nordic Natural Style
+- General Image-to-Image Template
+
+See `references/prompt-templates.md`.
+
+## Render Style Reference
+
+User's preferred render style core keywords:
+
+- **Color**: Low saturation neutral gray, clean and transparent
+- **Light**: Natural diffuse, soft shadows
+- **Atmosphere**: Serene, cinematic
+- **Material**: Real texture, subtle flaws
+- **Mist**: Subtle in distance for depth
+- **Scenery**: Appropriate people, not overshadowing main building
+
+See `references/render-style-guide.md`.
+
+## Render Analysis Method
+
+AI analyzes renders from 7 dimensions:
+
+1. **Structure & Proportion** - Structure, proportion, form
+2. **Light & Shadow Logic** - Lighting realism, atmosphere, shadows
+3. **Material Texture** - Material realism, seam details
+4. **Color & Harmony** - Color unity, warm-cold contrast
+5. **Layer & Depth** - Depth, DOF, mist
+6. **Scenery & Composition** - People/plants/scenery, composition balance
+7. **Overall Atmosphere** - Cinematic, touching, overall sense
+
+## FAQ
+
+**Q: "LIBTV_ACCESS_KEY not set"?**
 ```bash
 export LIBTV_ACCESS_KEY="your-key"
 ```
 
-**Q: 鐢熸垚澶辫触鎬庝箞鍔烇紵**
-- 妫€鏌ョ綉缁滆繛鎺?- 纭API Key鏈夋晥
-- 鏌ョ湅project鐢诲竷閾炬帴鎵嬪姩妫€鏌?
-**Q: 濡備綍鍔犻€熺敓鎴愶紵**
-鐩墠杞闂撮殧8绉掞紝杩炵画3鍒嗛挓鏃犵粨鏋滀細鍋滄锛屽彲绋嶅悗鏌ョ湅鐢诲竷銆?
-**Q: 濡備綍鎵归噺鐢熸垚锛?*
-澶氭璋冪敤create_session.py锛屾瘡娆′娇鐢ㄤ笉鍚岀殑搴曞浘鍜宻ession銆?
-## 鏇存柊鏃ュ織
+**Q: Generation failed?**
+- Check network connection
+- Confirm API Key is valid
+- Manually check project canvas link
 
-- **v1.0** (2026-05-09): 鍒濆鐗堟湰锛屽寘鍚畬鏁碙ibTV宸ヤ綔娴佸拰prompt妯℃澘
+**Q: How to speed up generation?**
+Currently poll interval is 8 seconds, stops after 3 minutes with no result. Check canvas later.
+
+**Q: How to batch generate?**
+Call create_session.py multiple times, each with different base image and session.
+
+## Changelog
+
+- **v1.0** (2026-05-09): Initial version, complete LibTV workflow and prompt templates
